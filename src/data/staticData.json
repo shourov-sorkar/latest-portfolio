@@ -86,13 +86,13 @@
   "education": [
     {
       "degree": "M.S. Computer Science",
-      "institution": "",
+      "institution": "Dummy University",
       "year": "2018",
       "description": "Focused on web technologies and distributed systems"
     },
     {
       "degree": "B.S. Computer Science",
-      "institution": "",
+      "institution": "Dummy University",
       "year": "2016",
       "description": "Graduated with honors"
     }
