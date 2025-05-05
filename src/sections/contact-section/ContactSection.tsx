@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { FiMail, FiLinkedin, FiSend, FiCheckCircle } from "react-icons/fi";
+import emailjs from "@emailjs/browser";
 
 type ContactFormData = {
   name: string;
@@ -40,6 +41,7 @@ export const ContactSection = () => {
   const isInView = useInView(sectionRef, { once: false, amount: 0.2 });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const {
     register,
@@ -81,15 +83,36 @@ export const ContactSection = () => {
     };
   }, []);
   const onSubmit = async (data: ContactFormData) => {
-    setIsLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    console.log("Form submitted:", data);
-    setIsLoading(false);
-    setIsSubmitted(true);
-    reset();
-    setTimeout(() => {
-      setIsSubmitted(false);
-    }, 5000);
+    try {
+      setIsLoading(true);
+      setSubmitError(null);
+      const serviceID = "";
+      const templateID = "";
+      const publicKey = "";
+      const templateParams = {
+        from_name: data.name,
+        from_email: data.email,
+        to_email: "",
+        message: data.message,
+      };
+      const result = await emailjs.send(
+        serviceID,
+        templateID,
+        templateParams,
+        publicKey
+      );
+      console.log("Email sent successfully:", result.text);
+      setIsSubmitted(true);
+      reset();
+      setTimeout(() => {
+        setIsSubmitted(false);
+      }, 5000);
+    } catch (error) {
+      console.error("Failed to send email:", error);
+      setSubmitError("Failed to send email. Please try again later.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -230,6 +253,10 @@ export const ContactSection = () => {
                       </p>
                     )}
                   </div>
+
+                  {submitError && (
+                    <p className="text-red-500 text-sm mb-4">{submitError}</p>
+                  )}
 
                   <motion.button
                     type="submit"
