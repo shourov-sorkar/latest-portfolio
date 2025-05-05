@@ -88,9 +88,20 @@
   ],
   "experience": [
     {
-      "company": "Dummy Company",
-      "position": "Senior Developer",
-      "duration": "2020 - Present",
+      "company": "Cognitus",
+      "position": "Senior Software Engineer",
+      "duration": "2023 - Present",
+      "description": "Developed responsive web applications using React and modern JavaScript frameworks",
+      "responsibilities": [
+        "Built reusable component library",
+        "Integrated with RESTful APIs",
+        "Implemented unit and integration tests"
+      ]
+    },
+    {
+      "company": "Implevista",
+      "position": "Software Engineer",
+      "duration": "2021 - 2023",
       "description": "Leading development of enterprise web applications, mentoring junior developers, and implementing CI/CD pipelines",
       "responsibilities": [
         "Architected and developed scalable frontend solutions",
@@ -99,9 +110,9 @@
       ]
     },
     {
-      "company": "Dummy Company",
-      "position": "Frontend Developer",
-      "duration": "2018 - 2020",
+      "company": "Pioneer Alpha",
+      "position": "Associate Software Engineer",
+      "duration": "2020 - 2021",
       "description": "Developed responsive web applications using React and modern JavaScript frameworks",
       "responsibilities": [
         "Built reusable component library",
