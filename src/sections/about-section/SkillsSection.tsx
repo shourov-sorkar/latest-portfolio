@@ -19,20 +19,18 @@ export const SkillsSection = ({ isInView }: { isInView: boolean }) => {
     (category) => category.category === activeTab
   );
   const activeSkills = activeSkillCategory?.items || [];
+  
   const handleTabChange = (tab: string) => {
-    prevTabRef.current = activeTab;
-    setActiveTab(tab);
+    if (tab !== activeTab) {
+      prevTabRef.current = activeTab;
+      setActiveTab(tab);
+    }
   };
-  const contentVariants = {
-    enter: {
-      opacity: 0,
-    },
-    center: {
-      opacity: 1,
-    },
-    exit: {
-      opacity: 0,
-    },
+  
+  const getDirection = () => {
+    const currentIndex = categories.indexOf(activeTab);
+    const prevIndex = categories.indexOf(prevTabRef.current);
+    return currentIndex > prevIndex ? 1 : -1;
   };
 
   return (
@@ -57,14 +55,13 @@ export const SkillsSection = ({ isInView }: { isInView: boolean }) => {
             layoutId="activeTabBackground"
             transition={{
               type: "spring",
-              stiffness: 300,
+              stiffness: 500,
               damping: 30,
+              duration: 0.2
             }}
             style={{
-              width: `calc(100% / ${categories.length})`,
-              left: `calc((100% / ${categories.length}) * ${categories.indexOf(
-                activeTab
-              )})`,
+              width: `${100 / categories.length}%`,
+              left: `${(100 / categories.length) * categories.indexOf(activeTab)}%`,
             }}
           />
 
@@ -72,21 +69,20 @@ export const SkillsSection = ({ isInView }: { isInView: boolean }) => {
             <button
               key={category}
               onClick={() => handleTabChange(category)}
-              className="text-center py-2 z-10 relative"
+              className="text-center py-2 z-10 relative focus:outline-none"
             >
               <motion.span
-                className={`px-2 py-1 text-sm font-medium ${
-                  activeTab === category
-                    ? "text-white"
-                    : "text-gray-300 hover:text-white"
-                }`}
+                className="px-2 py-1 text-sm font-medium relative"
+                initial={{ color: "#d1d5db" }}
+                animate={{ 
+                  color: activeTab === category ? "#ffffff" : "#d1d5db",
+                  scale: activeTab === category ? 1.1 : 1
+                }}
                 whileHover={{ y: -2 }}
-                animate={
-                  activeTab === category
-                    ? { scale: 1.05, y: 0 }
-                    : { scale: 1, y: 0 }
-                }
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                transition={{ 
+                  color: { duration: 0.2 },
+                  scale: { type: "spring", stiffness: 500, damping: 25, duration: 0.15 } 
+                }}
               >
                 {category}
               </motion.span>
@@ -94,21 +90,19 @@ export const SkillsSection = ({ isInView }: { isInView: boolean }) => {
           ))}
         </div>
       </motion.div>
-      <div
-        className="relative w-full overflow-hidden"
-        style={{ minHeight: "300px" }}
-      >
-        <AnimatePresence mode="wait">
+      
+      <div className="relative w-full overflow-hidden" style={{ height: "380px" }}>
+        <AnimatePresence initial={false} mode="wait">
           <motion.div
             key={activeTab}
-            variants={contentVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
+            initial={{ x: 200 * getDirection(), opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: -200 * getDirection(), opacity: 0 }}
             transition={{
-              opacity: { duration: 0.05 },
+              x: { type: "spring", stiffness: 400, damping: 30, duration: 0.15 },
+              opacity: { duration: 0.1 }
             }}
-            className="w-full grid grid-cols-1 md:grid-cols-3 gap-10 absolute"
+            className="w-full grid grid-cols-1 md:grid-cols-3 gap-10 absolute top-0 left-0 right-0"
           >
             {activeSkills.map((skill, index: number) => {
               const skillName = typeof skill === "string" ? skill : skill.name;
@@ -120,17 +114,16 @@ export const SkillsSection = ({ isInView }: { isInView: boolean }) => {
                   className="w-full"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
                   transition={{
                     type: "spring",
                     stiffness: 500,
                     damping: 30,
-                    delay: index * 0.01,
+                    delay: index * 0.02,
                   }}
                 >
                   <div className="flex justify-between mb-1">
                     <span className="text-white">{skillName}</span>
-                    <CountUp value={percentage} delay={index * 0.05} />
+                    <CountUp value={percentage} delay={index * 0.02} />
                   </div>
                   <div className="w-full h-2 bg-gray-800 rounded-full overflow-hidden">
                     <motion.div
@@ -141,7 +134,7 @@ export const SkillsSection = ({ isInView }: { isInView: boolean }) => {
                         type: "spring",
                         stiffness: 200,
                         damping: 20,
-                        delay: index * 0.05 ,
+                        delay: index * 0.02,
                       }}
                     />
                   </div>
@@ -154,13 +147,14 @@ export const SkillsSection = ({ isInView }: { isInView: boolean }) => {
     </div>
   );
 };
+
 const CountUp = ({ value, delay = 0 }: { value: number; delay?: number }) => {
   const count = useMotionValue(0);
   const [displayValue, setDisplayValue] = useState(0);
 
   useEffect(() => {
     const animation = animate(count, value, {
-      duration: 1,
+      duration: 0.6,
       delay: delay,
       ease: "easeOut",
       onUpdate: (latest) => {
