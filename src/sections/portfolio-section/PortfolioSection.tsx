@@ -48,28 +48,28 @@ export const PortfolioSection = () => {
     {
       title: 'Modern E-commerce Platform',
       description: 'A full-stack e-commerce platform built with Next.js, Node.js, and MongoDB. Features include user authentication, product management, cart functionality, payment processing, and order tracking.',
-      image: 'https://via.placeholder.com/600x400',
+      image: 'https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=3908&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       technologies: ['Next.js', 'Node.js', 'MongoDB', 'Stripe', 'Redux'],
       link: '#'
     },
     {
       title: 'Real-time Chat Application',
       description: 'A real-time messaging application with private and group chat capabilities. Built with React, Socket.io, and Express with a focus on performance and security.',
-      image: 'https://via.placeholder.com/600x400',
+      image: 'https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=3908&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       technologies: ['React', 'Socket.io', 'Express', 'MongoDB', 'JWT'],
       link: '#'
     },
     {
       title: 'Task Management Dashboard',
       description: 'A comprehensive project management tool with task tracking, team collaboration, and analytics. Features drag-and-drop interfaces and real-time updates.',
-      image: 'https://via.placeholder.com/600x400',
+      image: 'https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=3908&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       technologies: ['React', 'TypeScript', 'Firebase', 'Material UI', 'Chart.js'],
       link: '#'
     },
     {
       title: 'Mobile Fitness Application',
       description: 'A cross-platform mobile app for fitness tracking, workout plans, and nutrition management. Includes social sharing and achievement features.',
-      image: 'https://via.placeholder.com/600x400',
+      image: 'https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=3908&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       technologies: ['React Native', 'Redux', 'Firebase', 'Health API', 'Node.js'],
       link: '#'
     }
