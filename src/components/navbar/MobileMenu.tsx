@@ -87,7 +87,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
 
         <div className="p-6 mt-auto">
           <div className="text-sm text-zinc-400 border-t border-zinc-800/50 pt-4">
-            <p className="text-center">© 2023 MONIR</p>
+            <p className="text-center">© {new Date().getFullYear()} MONIR</p>
           </div>
         </div>
       </motion.div>

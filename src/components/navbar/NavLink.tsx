@@ -17,21 +17,25 @@ export const NavLink: React.FC<NavLinkProps> = ({
     return (
       <button
         className={`group relative overflow-hidden py-5 px-5 my-2 rounded-md transition-all flex items-center
-          ${isActive ? "text-cyan-400 pl-8" : "text-white/90"}
+          ${isActive ? "text-cyan-400 font-semibold pl-8" : "text-white/90"}
           ${isChangingSection ? "pointer-events-none" : ""}
           ${hoveredLink === link.id ? "hover-active" : ""}`}
         onClick={() => onClick(link.id)}
         onMouseEnter={() => onHover && onHover(link.id)}
         onMouseLeave={() => onHover && onHover(null)}
         disabled={isChangingSection}
+        style={isActive ? {
+          textShadow: "0 0 10px rgba(34, 211, 238, 0.7)",
+          color: "#22d3ee"
+        } : {}}
       >
         {(isActive || hoveredLink === link.id) && (
           <div
             className="absolute inset-0 z-0 rounded-md"
             style={{
-              opacity: isActive ? 0.15 : 0.05,
+              opacity: isActive ? 0.2 : 0.05,
               background:
-                "linear-gradient(135deg, rgba(8,145,178,0.4) 0%, rgba(14,116,144,0.1) 100%)",
+                "linear-gradient(135deg, rgba(8,145,178,0.5) 0%, rgba(14,116,144,0.1) 100%)",
             }}
           />
         )}
@@ -40,10 +44,10 @@ export const NavLink: React.FC<NavLinkProps> = ({
           <div className="absolute left-0 top-0 h-full w-[3px] bg-gradient-to-b from-cyan-400 via-cyan-400 to-blue-500 rounded-l-md" />
         )}
 
-        <span className="relative z-10 text-xl font-medium">
+        <span className={`relative z-10 text-xl ${isActive ? "font-bold" : "font-medium"}`}>
           {link.name}
         </span>
-        <span className="ml-auto text-cyan-400/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <span className={`ml-auto ${isActive ? "text-cyan-300" : "text-cyan-400/70 opacity-0 group-hover:opacity-100"} transition-all duration-300`}>
           →
         </span>
       </button>
@@ -60,9 +64,13 @@ export const NavLink: React.FC<NavLinkProps> = ({
         textShadow: "0 0 8px rgba(34, 211, 238, 0.6)",
       }}
       whileTap={{ scale: 0.95 }}
-      className={`nav-link text-base font-medium relative px-2 py-1 ${isActive ? "text-cyan-400" : "text-white/90"} ${isChangingSection ? "pointer-events-none" : ""}`}
+      className={`nav-link text-base relative px-2 py-1 transition-all duration-300 ${isActive ? "text-cyan-400 font-bold" : "text-white/90 font-medium"} ${isChangingSection ? "pointer-events-none" : ""}`}
       onClick={() => onClick(link.id)}
       disabled={isChangingSection}
+      style={isActive ? {
+        textShadow: "0 0 12px rgba(34, 211, 238, 0.8)",
+        color: "#34eeff"
+      } : {}}
     >
       <span className="relative z-10">
         {link.name}
