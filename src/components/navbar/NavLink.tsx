@@ -13,6 +13,44 @@ export const NavLink: React.FC<NavLinkProps> = ({
   custom
 }) => {
   const { indicatorVariants, linkVariants } = useNavbarAnimations();
+  
+  // Special handler for Home link
+  const handleClick = (event: React.MouseEvent) => {
+    console.log(`NavLink: Clicked on ${link.id}`);
+    
+    // Special handling for Home link
+    if (link.id === 'home') {
+      console.log('NavLink: Home link - special direct handling');
+      
+      // Prevent default behavior to ensure our scroll handling works
+      event.preventDefault();
+      
+      // If global scrollToTop exists, use it
+      if (window.scrollToTop) {
+        window.scrollToTop();
+      } else {
+        // Otherwise use native smooth scrolling
+        try {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        } catch {
+          // Fallback for older browsers
+          window.scrollTo(0, 0);
+        }
+      }
+      
+      // Notify parent component
+      onClick(link.id);
+      
+      return;
+    }
+    
+    // For other links, use the regular handler
+    onClick(link.id);
+  };
+  
   if (isMobile) {
     return (
       <button
@@ -20,7 +58,7 @@ export const NavLink: React.FC<NavLinkProps> = ({
           ${isActive ? "text-cyan-400 font-semibold pl-8" : "text-white/90"}
           ${isChangingSection ? "pointer-events-none" : ""}
           ${hoveredLink === link.id ? "hover-active" : ""}`}
-        onClick={() => onClick(link.id)}
+        onClick={handleClick}
         onMouseEnter={() => onHover && onHover(link.id)}
         onMouseLeave={() => onHover && onHover(null)}
         disabled={isChangingSection}
@@ -65,7 +103,7 @@ export const NavLink: React.FC<NavLinkProps> = ({
       }}
       whileTap={{ scale: 0.95 }}
       className={`nav-link text-base relative px-2 py-1 transition-all duration-300 ${isActive ? "text-cyan-400 font-bold" : "text-white/90 font-medium"} ${isChangingSection ? "pointer-events-none" : ""}`}
-      onClick={() => onClick(link.id)}
+      onClick={handleClick}
       disabled={isChangingSection}
       style={isActive ? {
         textShadow: "0 0 12px rgba(34, 211, 238, 0.8)",
