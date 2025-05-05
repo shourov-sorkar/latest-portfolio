@@ -1,7 +1,12 @@
 {
+  "heroSection": {
+    "welcomeText": "Hi! I'm"
+  },
   "personal": {
     "name": "Monir Hossain Showrav",
+    "shortName": "Monir",
     "title": "Sr. Software Engineer",
+    "shortDescription": "An architect of logic building bridges between ideas and code.",
     "email": "rshourov156@gmail.com",
     "phone": "",
     "location": "",

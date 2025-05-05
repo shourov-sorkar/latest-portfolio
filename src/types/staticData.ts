@@ -5,6 +5,8 @@ export interface Personal {
   phone: string;
   location: string;
   bio: string;
+  shortDescription: string;
+  shortName: string;
 }
 
 export interface SkillCategory {
@@ -42,7 +44,9 @@ export interface SocialLinks {
   linkedin: string;
   twitter: string;
 }
-
+export interface HeroSection {
+  welcomeText: string;
+}
 export interface StaticData {
   personal: Personal;
   skills: SkillCategory[];
@@ -50,4 +54,5 @@ export interface StaticData {
   experience: Experience[];
   education: Education[];
   socialLinks: SocialLinks;
-} 
+  heroSection: HeroSection;
+}

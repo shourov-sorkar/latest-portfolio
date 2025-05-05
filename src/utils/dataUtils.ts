@@ -1,16 +1,16 @@
-import staticData from '../data/staticData.json';
-import { 
-  StaticData, 
-  Personal, 
-  SkillCategory, 
-  Project, 
-  Experience, 
-  Education, 
-  SocialLinks 
-} from '../types/staticData';
-
+import staticData from "../data/staticData.json";
+import {
+  StaticData,
+  Personal,
+  SkillCategory,
+  Project,
+  Experience,
+  Education,
+  SocialLinks,
+  HeroSection,
+} from "../types/staticData";
 // Type assertion for the imported JSON
-const typedData = staticData as StaticData;
+const typedData = staticData as unknown as StaticData;
 
 /**
  * Get all static data
@@ -34,9 +34,13 @@ export const getPersonalInfo = (): Personal => {
  * @returns {SkillCategory[] | SkillCategory | null} Returns all skill categories as an array if no category is specified,
  * a single SkillCategory object if the category is found, or null if the specified category doesn't exist
  */
-export const getSkills = (category?: string): SkillCategory[] | SkillCategory | null => {
+export const getSkills = (
+  category?: string
+): SkillCategory[] | SkillCategory | null => {
   if (category) {
-    return typedData.skills.find(skill => skill.category === category) || null;
+    return (
+      typedData.skills.find((skill) => skill.category === category) || null
+    );
   }
   return typedData.skills;
 };
@@ -49,7 +53,7 @@ export const getSkills = (category?: string): SkillCategory[] | SkillCategory | 
  */
 export const getProjects = (id?: number): Project[] | Project | null => {
   if (id) {
-    return typedData.projects.find(project => project.id === id) || null;
+    return typedData.projects.find((project) => project.id === id) || null;
   }
   return typedData.projects;
 };
@@ -76,4 +80,12 @@ export const getEducation = (): Education[] => {
  */
 export const getSocialLinks = (): SocialLinks => {
   return typedData.socialLinks;
-}; 
+};
+
+/**
+ * Get hero section information
+ * @returns {HeroSection} Hero section data including welcome text
+ */
+export const getHeroSection = (): HeroSection => {
+  return typedData.heroSection;
+};

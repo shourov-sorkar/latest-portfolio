@@ -4,13 +4,16 @@ import { useIntersectionObserver } from "../../hooks/useIntersectionObserver";
 import { useTypewriterEffect } from "../../hooks/useTypewriterEffect";
 import { useBackgroundAnimation } from "../../hooks/useBackgroundAnimation";
 import { useScrollManager } from "../../hooks/useScrollManager";
+import { getHeroSection, getPersonalInfo } from "../../utils/dataUtils";
 
 export const HeroSection = () => {
   const bgRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLHeadingElement>(null);
   const isVisible = useIntersectionObserver("home");
+  const personalInfo = getPersonalInfo();
+  const hereSectionInfo = getHeroSection();
 
-  useTypewriterEffect(textRef, "Monir Hossain Showrav", isVisible);
+  useTypewriterEffect(textRef, personalInfo.name, isVisible);
   useBackgroundAnimation(bgRef);
   const { scrollToElement } = useScrollManager();
 
@@ -48,14 +51,16 @@ export const HeroSection = () => {
           transition={{ duration: 0.8 }}
           className="max-w-3xl"
         >
-          <p className="text-cyan-400 text-xl mb-4">Hi! I'm</p>
+          <p className="text-cyan-400 text-xl mb-4">
+            {hereSectionInfo.welcomeText}
+          </p>
         </motion.div>
         <motion.h1
           ref={textRef}
           className="text-5xl md:text-7xl  font-bold mb-6 glow-text max-w-7xl"
           initial={{ opacity: 0 }}
         >
-          Monir
+          {personalInfo.shortName}
         </motion.h1>
 
         <motion.p
@@ -64,7 +69,7 @@ export const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          An architect of logic building bridges between ideas and code.
+          {personalInfo.shortDescription}
         </motion.p>
 
         <motion.div
