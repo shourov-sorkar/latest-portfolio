@@ -24,23 +24,10 @@ export const HeroSection = () => {
     >
       <div
         ref={bgRef}
-        className="absolute inset-0 z-0"
-        style={{
-          background:
-            "radial-gradient(circle at center, rgba(34, 211, 238, 0.15) 0%, rgba(0, 0, 0, 0) 70%), linear-gradient(45deg, rgba(0, 0, 0, 1) 0%, rgba(17, 24, 39, 1) 100%)",
-          backgroundSize: "200% 200%",
-          backgroundPosition: "0% 0%",
-        }}
+        className="absolute inset-0 z-0 bg-gradient-to-tr from-black to-gray-900 bg-[length:200%_200%] bg-[0%_0%]"
       />
       <div className="absolute inset-0 z-0">
-        <div
-          className="w-full h-full"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, rgba(34, 211, 238, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(34, 211, 238, 0.05) 1px, transparent 1px)",
-            backgroundSize: "50px 50px",
-          }}
-        />
+        <div className="w-full h-full bg-[linear-gradient(to_right,rgba(34,211,238,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(34,211,238,0.05)_1px,transparent_1px)] bg-[size:50px_50px]" />
       </div>
       <div className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full bg-cyan-400/10 filter blur-xl animate-pulse-slow" />
       <div className="absolute bottom-1/3 right-1/3 w-40 h-40 rounded-full bg-cyan-400/5 filter blur-xl animate-float" />
@@ -57,7 +44,7 @@ export const HeroSection = () => {
         </motion.div>
         <motion.h1
           ref={textRef}
-          className="text-5xl md:text-7xl  font-bold mb-6 glow-text max-w-7xl"
+          className="text-5xl md:text-7xl font-bold mb-6 animate-glow max-w-7xl"
           initial={{ opacity: 0 }}
         >
           {personalInfo.shortName}
@@ -79,12 +66,7 @@ export const HeroSection = () => {
         >
           <button
             onClick={() => scrollToElement("portfolio")}
-            className="relative group px-8 py-3 text-lg font-medium text-white overflow-hidden rounded-lg transition-all duration-300 transform hover:scale-105"
-            style={{
-              background:
-                "linear-gradient(45deg, rgba(0,0,0,0.9), rgba(17, 24, 39, 0.9))",
-              boxShadow: "0 0 10px rgba(34, 211, 238, 0.1)",
-            }}
+            className="relative group px-8 py-3 text-lg font-medium text-white overflow-hidden rounded-lg transition-all duration-300 transform hover:scale-105 bg-gradient-to-tr from-black/90 to-gray-900/90 shadow-[0_0_5px_rgba(34,211,238,0.1)] hover:shadow-[0_0_10px_rgba(34,211,238,0.3)]"
           >
             <span className="relative z-10">My Works</span>
           </button>
