@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
-import { FiMail, FiLinkedin, FiSend, FiCheckCircle } from "react-icons/fi";
+import { FiMail, FiLinkedin, FiSend, FiCheckCircle, FiCalendar, FiArrowLeft } from "react-icons/fi";
 import emailjs from "@emailjs/browser";
 
 type ContactFormData = {
@@ -9,6 +9,15 @@ type ContactFormData = {
   email: string;
   message: string;
 };
+
+// Add Calendly type declaration
+declare global {
+  interface Window {
+    Calendly?: {
+      initPopupWidget: (options: { url: string }) => void;
+    };
+  }
+}
 
 const BackgroundEffects = () => (
   <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -42,6 +51,7 @@ export const ContactSection = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [showCalendar, setShowCalendar] = useState(false);
 
   const {
     register,
@@ -76,12 +86,31 @@ export const ContactSection = () => {
     const styleElement = document.createElement("style");
     styleElement.textContent = gradientStyles;
     document.head.appendChild(styleElement);
+    
     return () => {
       if (styleElement && document.head.contains(styleElement)) {
         document.head.removeChild(styleElement);
       }
     };
   }, []);
+  
+  // Separate useEffect for Calendly initialization
+  useEffect(() => {
+    // Load Calendly script
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    // Cleanup function
+    return () => {
+      // Check if script still exists in the document
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
+    };
+  }, []);
+
   const onSubmit = async (data: ContactFormData) => {
     try {
       setIsLoading(true);
@@ -298,60 +327,128 @@ export const ContactSection = () => {
                 discussing new projects and creative ideas.
               </p>
 
-              <div className="space-y-6">
-                <motion.a
-                  href="mailto:monir@example.com"
-                  className="flex items-center group bg-zinc-900/30 p-4 rounded-lg border border-zinc-800 relative overflow-hidden hover:border-cyan-900/50 transition-colors duration-300"
-                  whileHover={{
-                    x: 5,
-                    boxShadow: "0 5px 15px -5px rgba(34, 211, 238, 0.15)",
-                  }}
-                >
-                  <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-cyan-500/50"></div>
-                  <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-cyan-500/50"></div>
-                  <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-cyan-500/50"></div>
-                  <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-cyan-500/50"></div>
-                  <motion.div className="absolute inset-0 w-1/4 bg-gradient-to-r from-transparent via-cyan-500/10 to-transparent -translate-x-full group-hover:translate-x-full transition-all duration-1000 ease-in-out pointer-events-none"></motion.div>
-                  <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent"></div>
+              <AnimatePresence mode="wait">
+                {!showCalendar ? (
+                  <motion.div 
+                    className="space-y-6"
+                    key="contact-options"
+                    initial={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <motion.a
+                      href="mailto:monir@example.com"
+                      className="flex items-center group bg-zinc-900/30 p-4 rounded-lg border border-zinc-800 relative overflow-hidden hover:border-cyan-900/50 transition-colors duration-300"
+                      whileHover={{
+                        x: 5,
+                        boxShadow: "0 5px 15px -5px rgba(34, 211, 238, 0.15)",
+                      }}
+                    >
+                      <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-cyan-500/50"></div>
+                      <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-cyan-500/50"></div>
+                      <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-cyan-500/50"></div>
+                      <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-cyan-500/50"></div>
+                      <motion.div className="absolute inset-0 w-1/4 bg-gradient-to-r from-transparent via-cyan-500/10 to-transparent -translate-x-full group-hover:translate-x-full transition-all duration-1000 ease-in-out pointer-events-none"></motion.div>
+                      <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent"></div>
 
-                  <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full flex items-center justify-center mr-4 shadow-lg shadow-cyan-500/20">
-                    <FiMail className="text-white text-xl" />
-                  </div>
-                  <div>
-                    <p className="text-zinc-400 text-sm">Email</p>
-                    <p className="text-white group-hover:text-cyan-400 transition-colors duration-300">
-                      monir@example.com
-                    </p>
-                  </div>
-                </motion.a>
+                      <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full flex items-center justify-center mr-4 shadow-lg shadow-cyan-500/20">
+                        <FiMail className="text-white text-xl" />
+                      </div>
+                      <div>
+                        <p className="text-zinc-400 text-sm">Email</p>
+                        <p className="text-white group-hover:text-cyan-400 transition-colors duration-300">
+                          monir@example.com
+                        </p>
+                      </div>
+                    </motion.a>
 
-                <motion.a
-                  href="https://www.linkedin.com/in/monir-cse-1810/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center group bg-zinc-900/30 p-4 rounded-lg border border-zinc-800 relative overflow-hidden hover:border-cyan-900/50 transition-colors duration-300"
-                  whileHover={{
-                    x: 5,
-                    boxShadow: "0 5px 15px -5px rgba(34, 211, 238, 0.15)",
-                  }}
-                >
-                  <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-cyan-500/50"></div>
-                  <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-cyan-500/50"></div>
-                  <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-cyan-500/50"></div>
-                  <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-cyan-500/50"></div>
-                  <motion.div className="absolute inset-0 w-1/4 bg-gradient-to-r from-transparent via-cyan-500/10 to-transparent -translate-x-full group-hover:translate-x-full transition-all duration-1000 ease-in-out pointer-events-none"></motion.div>
-                  <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent"></div>
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center mr-4 shadow-lg shadow-blue-500/20">
-                    <FiLinkedin className="text-white text-xl" />
-                  </div>
-                  <div>
-                    <p className="text-zinc-400 text-sm">LinkedIn</p>
-                    <p className="text-white group-hover:text-cyan-400 transition-colors duration-300">
-                      linkedin.com/in/monir-cse-1810
-                    </p>
-                  </div>
-                </motion.a>
-              </div>
+                    <motion.a
+                      href="https://www.linkedin.com/in/monir-cse-1810/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center group bg-zinc-900/30 p-4 rounded-lg border border-zinc-800 relative overflow-hidden hover:border-cyan-900/50 transition-colors duration-300"
+                      whileHover={{
+                        x: 5,
+                        boxShadow: "0 5px 15px -5px rgba(34, 211, 238, 0.15)",
+                      }}
+                    >
+                      <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-cyan-500/50"></div>
+                      <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-cyan-500/50"></div>
+                      <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-cyan-500/50"></div>
+                      <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-cyan-500/50"></div>
+                      <motion.div className="absolute inset-0 w-1/4 bg-gradient-to-r from-transparent via-cyan-500/10 to-transparent -translate-x-full group-hover:translate-x-full transition-all duration-1000 ease-in-out pointer-events-none"></motion.div>
+                      <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent"></div>
+                      <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center mr-4 shadow-lg shadow-blue-500/20">
+                        <FiLinkedin className="text-white text-xl" />
+                      </div>
+                      <div>
+                        <p className="text-zinc-400 text-sm">LinkedIn</p>
+                        <p className="text-white group-hover:text-cyan-400 transition-colors duration-300">
+                          linkedin.com/in/monir-cse-1810
+                        </p>
+                      </div>
+                    </motion.a>
+                    
+                    <motion.button
+                      onClick={() => setShowCalendar(true)}
+                      className="w-full flex items-center group bg-zinc-900/30 p-4 rounded-lg border border-zinc-800 relative overflow-hidden hover:border-cyan-900/50 transition-colors duration-300"
+                      whileHover={{
+                        x: 5,
+                        boxShadow: "0 5px 15px -5px rgba(34, 211, 238, 0.15)",
+                      }}
+                    >
+                      <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-cyan-500/50"></div>
+                      <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-cyan-500/50"></div>
+                      <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-cyan-500/50"></div>
+                      <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-cyan-500/50"></div>
+                      <motion.div className="absolute inset-0 w-1/4 bg-gradient-to-r from-transparent via-cyan-500/10 to-transparent -translate-x-full group-hover:translate-x-full transition-all duration-1000 ease-in-out pointer-events-none"></motion.div>
+                      <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent"></div>
+                      <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-green-600 rounded-full flex items-center justify-center mr-4 shadow-lg shadow-emerald-500/20">
+                        <FiCalendar className="text-white text-xl" />
+                      </div>
+                      <div className="text-left">
+                        <p className="text-zinc-400 text-sm">Schedule a Meeting</p>
+                        <p className="text-white group-hover:text-cyan-400 transition-colors duration-300">
+                          Book a 30-minute call
+                        </p>
+                      </div>
+                    </motion.button>
+                  </motion.div>
+                ) : (
+                  <motion.div 
+                    key="calendar" 
+                    className="bg-zinc-900/50 backdrop-blur-sm rounded-lg border border-zinc-800 relative overflow-hidden"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <div className="p-4 flex justify-between items-center border-b border-zinc-800">
+                      <h5 className="text-white font-semibold flex items-center">
+                        <FiCalendar className="mr-2 text-cyan-400" />
+                        Schedule a 30-Minute Meeting
+                      </h5>
+                      <button 
+                        onClick={() => setShowCalendar(false)}
+                        className="flex items-center text-zinc-400 hover:text-cyan-400 transition-colors p-2"
+                      >
+                        <FiArrowLeft className="mr-1" />
+                        Back
+                      </button>
+                    </div>
+                    <div className="h-[600px]">
+                      <iframe
+                        src="https://calendly.com/monir_/30min?embed=true&text_color=ffffff&primary_color=22d3ee"
+                        width="100%"
+                        height="100%"
+                        frameBorder="0"
+                        title="Schedule a meeting"
+                        className="w-full h-full"
+                      ></iframe>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </motion.div>
         </div>
