@@ -31,6 +31,7 @@ export default {
         'scan-line': 'scanLine 3s ease-in-out infinite',
         'neon-pulse': 'neonPulse 2s infinite alternate',
         'tech-float': 'techFloat 8s ease-in-out infinite',
+        'gradient-x': 'gradientX 15s ease infinite',
       },
       keyframes: {
         float: {
@@ -59,6 +60,10 @@ export default {
           '50%': { transform: 'translateY(0) translateX(0) rotate(0deg)' },
           '75%': { transform: 'translateY(5px) translateX(-5px) rotate(-1deg)' },
           '100%': { transform: 'translateY(0) translateX(0) rotate(0deg)' },
+        },
+        gradientX: {
+          '0%, 100%': { transform: 'translateX(-100%)' },
+          '50%': { transform: 'translateX(100%)' }
         },
       },
       backdropBlur: {
