@@ -1,55 +1,38 @@
 import { motion, AnimatePresence } from "framer-motion";
 import useNavbarAnimations from "../../hooks/useNavbarAnimations";
 import { NavLinkProps } from "../../types/navbar";
-export const NavLink: React.FC<NavLinkProps> = ({ 
-  link, 
-  isActive, 
-  isChangingSection, 
-  onClick, 
+export const NavLink: React.FC<NavLinkProps> = ({
+  link,
+  isActive,
+  isChangingSection,
+  onClick,
   isMobile = false,
   hoveredLink = null,
   onHover = null,
-  custom
+  custom,
 }) => {
   const { indicatorVariants, linkVariants } = useNavbarAnimations();
-  
-  // Special handler for Home link
   const handleClick = (event: React.MouseEvent) => {
-    console.log(`NavLink: Clicked on ${link.id}`);
-    
-    // Special handling for Home link
-    if (link.id === 'home') {
-      console.log('NavLink: Home link - special direct handling');
-      
-      // Prevent default behavior to ensure our scroll handling works
+    if (link.id === "home") {
       event.preventDefault();
-      
-      // If global scrollToTop exists, use it
-      if (window.scrollToTop) {
-        window.scrollToTop();
+      if ("scrollToTop" in window) {
+        (window as unknown as { scrollToTop: () => void }).scrollToTop();
       } else {
-        // Otherwise use native smooth scrolling
         try {
           window.scrollTo({
             top: 0,
-            behavior: 'smooth'
+            behavior: "smooth",
           });
         } catch {
-          // Fallback for older browsers
           window.scrollTo(0, 0);
         }
       }
-      
-      // Notify parent component
       onClick(link.id);
-      
       return;
     }
-    
-    // For other links, use the regular handler
     onClick(link.id);
   };
-  
+
   if (isMobile) {
     return (
       <button
@@ -61,10 +44,14 @@ export const NavLink: React.FC<NavLinkProps> = ({
         onMouseEnter={() => onHover && onHover(link.id)}
         onMouseLeave={() => onHover && onHover(null)}
         disabled={isChangingSection}
-        style={isActive ? {
-          textShadow: "0 0 10px rgba(34, 211, 238, 0.7)",
-          color: "#22d3ee"
-        } : {}}
+        style={
+          isActive
+            ? {
+                textShadow: "0 0 10px rgba(34, 211, 238, 0.7)",
+                color: "#22d3ee",
+              }
+            : {}
+        }
       >
         {(isActive || hoveredLink === link.id) && (
           <div
@@ -81,16 +68,26 @@ export const NavLink: React.FC<NavLinkProps> = ({
           <div className="absolute left-0 top-0 h-full w-[3px] bg-gradient-to-b from-cyan-400 via-cyan-400 to-blue-500 rounded-l-md" />
         )}
 
-        <span className={`relative z-10 text-xl ${isActive ? "font-bold" : "font-medium"}`}>
+        <span
+          className={`relative z-10 text-xl ${
+            isActive ? "font-bold" : "font-medium"
+          }`}
+        >
           {link.name}
         </span>
-        <span className={`ml-auto ${isActive ? "text-cyan-300" : "text-cyan-400/70 opacity-0 group-hover:opacity-100"} transition-all duration-300`}>
+        <span
+          className={`ml-auto ${
+            isActive
+              ? "text-cyan-300"
+              : "text-cyan-400/70 opacity-0 group-hover:opacity-100"
+          } transition-all duration-300`}
+        >
           →
         </span>
       </button>
     );
   }
-  
+
   return (
     <motion.button
       custom={custom}
@@ -101,17 +98,21 @@ export const NavLink: React.FC<NavLinkProps> = ({
         textShadow: "0 0 8px rgba(34, 211, 238, 0.6)",
       }}
       whileTap={{ scale: 0.95 }}
-      className={`nav-link text-base relative px-2 py-1 transition-all duration-300 ${isActive ? "text-cyan-400 font-bold" : "text-white/90 font-medium"} ${isChangingSection ? "pointer-events-none" : ""}`}
+      className={`nav-link text-base relative px-2 py-1 transition-all duration-300 ${
+        isActive ? "text-cyan-400 font-bold" : "text-white/90 font-medium"
+      } ${isChangingSection ? "pointer-events-none" : ""}`}
       onClick={handleClick}
       disabled={isChangingSection}
-      style={isActive ? {
-        textShadow: "0 0 12px rgba(34, 211, 238, 0.8)",
-        color: "#34eeff"
-      } : {}}
+      style={
+        isActive
+          ? {
+              textShadow: "0 0 12px rgba(34, 211, 238, 0.8)",
+              color: "#34eeff",
+            }
+          : {}
+      }
     >
-      <span className="relative z-10">
-        {link.name}
-      </span>
+      <span className="relative z-10">{link.name}</span>
       <AnimatePresence>
         {isActive && (
           <motion.span
