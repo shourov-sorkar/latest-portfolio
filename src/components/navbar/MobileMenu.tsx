@@ -2,9 +2,9 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { FiX } from "react-icons/fi";
 import useNavbarAnimations from "../../hooks/useNavbarAnimations";
-import { MobileMenuProps, navLinks } from "./types";
 import { Logo } from ".";
 import { NavLink } from "./NavLink";
+import { MobileMenuProps, navLinks } from "../../types/navbar";
 
 export const MobileMenu: React.FC<MobileMenuProps> = ({ 
   isOpen, 

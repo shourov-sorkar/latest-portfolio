@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import useNavbarAnimations from "../../hooks/useNavbarAnimations";
-import { LogoProps } from "./types";
+import { LogoProps } from "../../types/navbar";
 
 export const Logo: React.FC<LogoProps> = ({ isOpen = false }) => {
   const { logoVariants } = useNavbarAnimations();

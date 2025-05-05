@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { FiMenu, FiX } from "react-icons/fi";
-import { MobileMenuButtonProps } from "./types";
+import { MobileMenuButtonProps } from "../../types/navbar";
 
 export const MobileMenuButton: React.FC<MobileMenuButtonProps> = ({ 
   isOpen, 

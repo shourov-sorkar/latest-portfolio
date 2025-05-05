@@ -1,7 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import useNavbarAnimations from "../../hooks/useNavbarAnimations";
-import { NavLinkProps } from "./types";
-
+import { NavLinkProps } from "../../types/navbar";
 export const NavLink: React.FC<NavLinkProps> = ({ 
   link, 
   isActive, 

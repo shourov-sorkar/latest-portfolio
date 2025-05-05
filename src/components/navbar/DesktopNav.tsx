@@ -1,5 +1,5 @@
-import { DesktopNavProps } from "./types";
-import { navLinks } from "./types";
+
+import { DesktopNavProps, navLinks } from "../../types/navbar";
 import { NavLink } from "./NavLink";
 
 export const DesktopNav: React.FC<DesktopNavProps> = ({ 
