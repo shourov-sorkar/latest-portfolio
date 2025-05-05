@@ -33,6 +33,11 @@ const SectionTitle = ({ isInView }: { isInView: boolean }) => (
       <span className="text-cyan-400 ml-2">Me</span>
       <div className="absolute left-1/2 -bottom-3 w-36 h-[2px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent transform -translate-x-1/2"></div>
     </h3>
+    <div className="text-center mt-6 text-xs uppercase tracking-widest text-zinc-500">
+      <span>Sr. Software Engineer</span>
+      <span className="mx-2 text-cyan-500">&</span>
+      <span>Solution Architect</span>
+    </div>
   </motion.div>
 );
 
