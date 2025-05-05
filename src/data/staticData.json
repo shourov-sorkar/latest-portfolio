@@ -1,0 +1,100 @@
+{
+  "personal": {
+    "name": "Monir Hossain Showrav",
+    "title": "Sr. Software Engineer",
+    "email": "rshourov156@gmail.com",
+    "phone": "",
+    "location": "",
+    "bio": ""
+  },
+  "skills": [
+    {
+      "category": "Frontend",
+      "items": ["React", "TypeScript", "HTML5", "CSS3", "Tailwind CSS"]
+    },
+    {
+      "category": "Backend",
+      "items": ["Node.js", "Express", "Python", "Django"]
+    },
+    {
+      "category": "Database",
+      "items": ["MongoDB", "PostgreSQL", "MySQL"]
+    },
+    {
+      "category": "Tools",
+      "items": ["Git", "Docker", "AWS", "Figma"]
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "title": "E-commerce Platform",
+      "description": "A full-featured e-commerce platform with user authentication, product catalog, and payment integration",
+      "technologies": ["React", "Node.js", "MongoDB", "Stripe"],
+      "image": "/images/project1.jpg",
+      "link": "https://example.com/project1",
+      "github": "https://github.com/johndoe/project1"
+    },
+    {
+      "id": 2,
+      "title": "Task Management App",
+      "description": "A responsive task management application with real-time updates and collaboration features",
+      "technologies": ["React", "TypeScript", "Firebase"],
+      "image": "/images/project2.jpg",
+      "link": "https://example.com/project2",
+      "github": "https://github.com/johndoe/project2"
+    },
+    {
+      "id": 3,
+      "title": "Weather Dashboard",
+      "description": "An interactive weather dashboard showing forecasts and historical data visualizations",
+      "technologies": ["React", "D3.js", "Weather API"],
+      "image": "/images/project3.jpg",
+      "link": "https://example.com/project3",
+      "github": "https://github.com/johndoe/project3"
+    }
+  ],
+  "experience": [
+    {
+      "company": "Dummy Company",
+      "position": "Senior Developer",
+      "duration": "2020 - Present",
+      "description": "Leading development of enterprise web applications, mentoring junior developers, and implementing CI/CD pipelines",
+      "responsibilities": [
+        "Architected and developed scalable frontend solutions",
+        "Managed team of 5 developers",
+        "Reduced application load time by 40%"
+      ]
+    },
+    {
+      "company": "Dummy Company",
+      "position": "Frontend Developer",
+      "duration": "2018 - 2020",
+      "description": "Developed responsive web applications using React and modern JavaScript frameworks",
+      "responsibilities": [
+        "Built reusable component library",
+        "Integrated with RESTful APIs",
+        "Implemented unit and integration tests"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "M.S. Computer Science",
+      "institution": "",
+      "year": "2018",
+      "description": "Focused on web technologies and distributed systems"
+    },
+    {
+      "degree": "B.S. Computer Science",
+      "institution": "",
+      "year": "2016",
+      "description": "Graduated with honors"
+    }
+  ],
+  "socialLinks": {
+    "github": "https://github.com/shourov-cse-181",
+    "linkedin": "https://linkedin.com/in/shourov-cse-181",
+    "twitter": "https://twitter.com/shourov-cse-181"
+  }
+} 

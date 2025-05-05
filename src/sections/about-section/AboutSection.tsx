@@ -6,7 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
-const AboutSection = () => {
+export const AboutSection = () => {
   const skillsRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: false, amount: 0.3 });
@@ -221,5 +221,3 @@ const AboutSection = () => {
     </section>
   );
 };
-
-export default AboutSection; 

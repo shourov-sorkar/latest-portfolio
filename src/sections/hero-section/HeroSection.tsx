@@ -1,9 +1,9 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
-import { useBackgroundAnimation } from "../hooks/useBackgroundAnimation";
-import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
-import { useTypewriterEffect } from "../hooks/useTypewriterEffect";
-import { useScrollManager } from "../hooks/useScrollManager";
+import { useIntersectionObserver } from "../../hooks/useIntersectionObserver";
+import { useTypewriterEffect } from "../../hooks/useTypewriterEffect";
+import { useBackgroundAnimation } from "../../hooks/useBackgroundAnimation";
+import { useScrollManager } from "../../hooks/useScrollManager";
 
 export const HeroSection = () => {
   const bgRef = useRef<HTMLDivElement>(null);
