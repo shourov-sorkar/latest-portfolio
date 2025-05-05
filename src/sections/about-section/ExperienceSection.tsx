@@ -213,14 +213,30 @@ const ExperienceCard = ({
           </motion.div>
         )}
       </AnimatePresence>
-      <button
+      <motion.button
         onClick={onToggle}
-        className="mt-4 px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 border border-cyan-800/50 rounded text-xs text-cyan-400 flex items-center gap-1.5 transition-colors duration-200"
+        className="mt-4 px-3 py-1 text-xs rounded-md border border-cyan-500/30 text-cyan-400 flex items-center gap-1 hover:bg-cyan-500/10 transition-colors"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.98 }}
       >
-        <span className="w-2 h-2 bg-cyan-500 rounded-full"></span>
-        {isExpanded ? "Show Less" : "Show More"}
-      </button>
-
+        <span>{isExpanded ? "Show Less" : "Show More"}</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="12"
+          height="12"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className={`transform transition-transform duration-300 ${
+            isExpanded ? "rotate-180" : ""
+          }`}
+        >
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </motion.button>
       <motion.div className="absolute inset-0 w-1/4 bg-gradient-to-r from-transparent via-cyan-500/10 to-transparent -translate-x-full group-hover:translate-x-full transition-all duration-1000 ease-in-out pointer-events-none"></motion.div>
       <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent"></div>
     </motion.div>

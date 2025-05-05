@@ -27,8 +27,8 @@ export const AboutSection = () => {
       <div className="container relative z-10">
         <ProfileSection isInView={isInView} />
         <SkillsSection isInView={isInView} />
-        <EducationSection isInView={isInView} />
         <ExperienceSection isInView={isInView} />
+        <EducationSection isInView={isInView} />
       </div>
     </section>
   );

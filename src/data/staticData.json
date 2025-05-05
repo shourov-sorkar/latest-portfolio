@@ -123,18 +123,37 @@
   ],
   "education": [
     {
-      "degree": "M.S. Computer Science",
-      "institution": "Dummy University",
-      "year": "2018",
-      "description": "Focused on web technologies and distributed systems"
+      "degree": "Master of Business Administration (MBA)",
+      "institution": "Bangladesh University of Professionals (BUP)",
+      "year": "2023–Present",
+      "description": [
+        "Specialization in business strategy and technology management",
+        "Emphasis on modern digital systems and innovation",
+        "Courses aligned with real-world applications in tech-driven industries"
+      ]
     },
     {
-      "degree": "B.S. Computer Science",
-      "institution": "Dummy University",
-      "year": "2016",
-      "description": "Graduated with honors"
+      "degree": "Bachelor of Science in Computer Science & Engineering (B.Sc. CSE)",
+      "institution": "International University of Business Agriculture & Technology (IUBAT)",
+      "year": "2018–2022",
+      "description": [
+        "Focused on software development, data structures, and algorithms",
+        "Completed multiple academic and real-world projects",
+        "Graduated with strong academic performance and practical skills"
+      ]
+    },
+    {
+      "degree": "Higher Secondary Certificate (HSC)",
+      "institution": "Islamia Govt. College",
+      "year": "2015–2017",
+      "description": [
+        "Major in Science",
+        "Graduated with distinction",
+        "Participated in academic and extracurricular activities"
+      ]
     }
   ],
+
   "socialLinks": {
     "github": "https://github.com/shourov-cse-181",
     "linkedin": "https://linkedin.com/in/shourov-cse-181",
