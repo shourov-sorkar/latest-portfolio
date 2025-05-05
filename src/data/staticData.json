@@ -14,20 +14,47 @@
   },
   "skills": [
     {
-      "category": "Frontend",
-      "items": ["React", "TypeScript", "HTML5", "CSS3", "Tailwind CSS"]
+      "category": "Languages & Frameworks",
+      "items": [
+        { "name": "C", "percentage": 85 },
+        { "name": "C++", "percentage": 85 },
+        { "name": "HTML", "percentage": 95 },
+        { "name": "CSS & Tailwind CSS", "percentage": 95 },
+        { "name": "JavaScript", "percentage": 90 },
+        { "name": "TypeScript", "percentage": 90 },
+        { "name": "React.js", "percentage": 90 },
+        { "name": "NEXT.js", "percentage": 85 },
+        { "name": "Angular", "percentage": 88 },
+        { "name": "Node.js", "percentage": 90 },
+        { "name": "Express.js", "percentage": 90 },
+        { "name": "ASP.NET", "percentage": 85 },
+        { "name": "Python", "percentage": 80 },
+        { "name": "React Native", "percentage": 85 }
+      ]
     },
     {
-      "category": "Backend",
-      "items": ["Node.js", "Express", "Python", "Django"]
+      "category": "Databases",
+      "items": [
+        { "name": "MongoDB", "percentage": 90 },
+        { "name": "PostgreSQL", "percentage": 85 },
+        { "name": "MySQL", "percentage": 90 }
+      ]
     },
     {
-      "category": "Database",
-      "items": ["MongoDB", "PostgreSQL", "MySQL"]
+      "category": "Cloud Services",
+      "items": [
+        { "name": "AWS", "percentage": 80 },
+        { "name": "Azure App Service", "percentage": 80 },
+        { "name": "Firebase", "percentage": 82 }
+      ]
     },
     {
       "category": "Tools",
-      "items": ["Git", "Docker", "AWS", "Figma"]
+      "items": [
+        { "name": "Git", "percentage": 90 },
+        { "name": "Docker", "percentage": 90 },
+        { "name": "Figma", "percentage": 85 }
+      ]
     }
   ],
   "projects": [
@@ -102,4 +129,4 @@
     "linkedin": "https://linkedin.com/in/shourov-cse-181",
     "twitter": "https://twitter.com/shourov-cse-181"
   }
-} 
+}

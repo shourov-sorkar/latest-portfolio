@@ -9,9 +9,14 @@ export interface Personal {
   shortName: string;
 }
 
+export interface Skill {
+  name: string;
+  percentage: number;
+}
+
 export interface SkillCategory {
   category: string;
-  items: string[];
+  items: Skill[] | string[]; // Support both old and new format
 }
 
 export interface Project {
