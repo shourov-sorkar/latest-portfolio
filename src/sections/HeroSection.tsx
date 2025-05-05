@@ -9,7 +9,7 @@ export const HeroSection = () => {
   const bgRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLHeadingElement>(null);
   const isVisible = useIntersectionObserver("home");
-  
+
   useTypewriterEffect(textRef, "Monir Hossain Showrav", isVisible);
   useBackgroundAnimation(bgRef);
   const { scrollToElement } = useScrollManager();

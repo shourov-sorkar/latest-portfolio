@@ -103,7 +103,7 @@ export const Navbar = () => {
         animate="visible"
         variants={navbarVariants}
       >
-        <div className="container flex items-center justify-between px-6">
+        <div className="w-full flex items-center justify-between px-8">
           <Logo isOpen={isOpen} />
           <DesktopNav
             activeSection={activeSection}
