@@ -4,9 +4,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import Navbar from './components/navbar';
 import PortfolioSection from './sections/PortfolioSection';
-import ContactSection from './sections/ContactSection';
 import Footer from './components/Footer';
-import { HeroSection, AboutSection } from './sections';
+import { HeroSection, AboutSection, ContactSection } from './sections';
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
