@@ -1,7 +1,14 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
-import { FiMail, FiLinkedin, FiSend, FiCheckCircle, FiCalendar, FiArrowLeft } from "react-icons/fi";
+import {
+  FiMail,
+  FiLinkedin,
+  FiSend,
+  FiCheckCircle,
+  FiCalendar,
+  FiArrowLeft,
+} from "react-icons/fi";
 import emailjs from "@emailjs/browser";
 
 type ContactFormData = {
@@ -27,34 +34,34 @@ const BackgroundEffects = () => (
 );
 const SectionTitle = ({ isInView }: { isInView: boolean }) => (
   <motion.div
-  className="mb-8 relative"
-  initial={{ opacity: 0 }}
-  animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-  transition={{ duration: 0.6 }}
->
-  <div className="flex items-center justify-center gap-3 mb-2">
-    <div className="h-[1px] w-6 bg-cyan-500"></div>
-    <motion.div
-      className="w-3 h-3 rounded-sm bg-zinc-900 border border-cyan-500 relative rotate-45"
-      animate={{ rotate: [45, 225, 45] }}
-      transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-    >
-      <div className="absolute inset-0 bg-cyan-500/20 blur-sm"></div>
-    </motion.div>
-    <div className="h-[1px] w-6 bg-cyan-500"></div>
-  </div>
+    className="mb-8 relative"
+    initial={{ opacity: 0 }}
+    animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+    transition={{ duration: 0.6 }}
+  >
+    <div className="flex items-center justify-center gap-3 mb-2">
+      <div className="h-[1px] w-6 bg-cyan-500"></div>
+      <motion.div
+        className="w-3 h-3 rounded-sm bg-zinc-900 border border-cyan-500 relative rotate-45"
+        animate={{ rotate: [45, 225, 45] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+      >
+        <div className="absolute inset-0 bg-cyan-500/20 blur-sm"></div>
+      </motion.div>
+      <div className="h-[1px] w-6 bg-cyan-500"></div>
+    </div>
 
-  <h3 className="text-3xl font-bold text-center relative">
-    <span className="text-zinc-200">Contact</span>
-    <span className="text-cyan-400 ml-2">Me</span>
-    <div className="absolute left-1/2 -bottom-3 w-36 h-[2px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent transform -translate-x-1/2"></div>
-  </h3>
-  <div className="text-center mt-6 text-xs uppercase tracking-widest text-zinc-500">
-    <span>Got a project or question</span>
-    <span className="mx-2 text-cyan-500">?</span>
-    <span>Let’s connect.</span>
-  </div>
-</motion.div>
+    <h3 className="text-3xl font-bold text-center relative">
+      <span className="text-zinc-200">Contact</span>
+      <span className="text-cyan-400 ml-2">Me</span>
+      <div className="absolute left-1/2 -bottom-3 w-36 h-[2px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent transform -translate-x-1/2"></div>
+    </h3>
+    <div className="text-center mt-6 text-xs uppercase tracking-widest text-zinc-500">
+      <span>Got a project or question</span>
+      <span className="mx-2 text-cyan-500">?</span>
+      <span>Let’s connect.</span>
+    </div>
+  </motion.div>
 );
 export const ContactSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -97,19 +104,19 @@ export const ContactSection = () => {
     const styleElement = document.createElement("style");
     styleElement.textContent = gradientStyles;
     document.head.appendChild(styleElement);
-    
+
     return () => {
       if (styleElement && document.head.contains(styleElement)) {
         document.head.removeChild(styleElement);
       }
     };
   }, []);
-  
+
   // Separate useEffect for Calendly initialization
   useEffect(() => {
     // Load Calendly script
-    const script = document.createElement('script');
-    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    const script = document.createElement("script");
+    script.src = "https://assets.calendly.com/assets/external/widget.js";
     script.async = true;
     document.body.appendChild(script);
 
@@ -340,7 +347,7 @@ export const ContactSection = () => {
 
               <AnimatePresence mode="wait">
                 {!showCalendar ? (
-                  <motion.div 
+                  <motion.div
                     className="space-y-6"
                     key="contact-options"
                     initial={{ opacity: 1 }}
@@ -399,7 +406,7 @@ export const ContactSection = () => {
                         </p>
                       </div>
                     </motion.a>
-                    
+
                     <motion.button
                       onClick={() => setShowCalendar(true)}
                       className="w-full flex items-center group bg-zinc-900/30 p-4 rounded-lg border border-zinc-800 relative overflow-hidden hover:border-cyan-900/50 transition-colors duration-300"
@@ -418,7 +425,9 @@ export const ContactSection = () => {
                         <FiCalendar className="text-white text-xl" />
                       </div>
                       <div className="text-left">
-                        <p className="text-zinc-400 text-sm">Schedule a Meeting</p>
+                        <p className="text-zinc-400 text-sm">
+                          Schedule a Meeting
+                        </p>
                         <p className="text-white group-hover:text-cyan-400 transition-colors duration-300">
                           Book a 30-minute call
                         </p>
@@ -426,8 +435,8 @@ export const ContactSection = () => {
                     </motion.button>
                   </motion.div>
                 ) : (
-                  <motion.div 
-                    key="calendar" 
+                  <motion.div
+                    key="calendar"
                     className="bg-zinc-900/50 backdrop-blur-sm rounded-lg border border-zinc-800 relative overflow-hidden"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -439,7 +448,7 @@ export const ContactSection = () => {
                         <FiCalendar className="mr-2 text-cyan-400" />
                         Schedule a 30-Minute Meeting
                       </h5>
-                      <button 
+                      <button
                         onClick={() => setShowCalendar(false)}
                         className="flex items-center text-zinc-400 hover:text-cyan-400 transition-colors p-2"
                       >

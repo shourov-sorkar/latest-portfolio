@@ -2,14 +2,14 @@ import { motion } from 'framer-motion';
 
 interface ProjectCardProps {
   title: string;
-  description: string;
+  description?: string;
   image: string;
   technologies: string[];
   link: string;
   index: number;
 }
 
-const ProjectCard = ({ title, description, image, technologies, link, index }: ProjectCardProps) => {
+const ProjectCard = ({ title, description = "", image, technologies, link, index }: ProjectCardProps) => {
   return (
     <motion.div 
       className="portfolio-card"
@@ -33,7 +33,7 @@ const ProjectCard = ({ title, description, image, technologies, link, index }: P
           whileHover={{ y: 0 }}
         >
           <h3 className="text-xl font-semibold mb-2 text-cyan-400">{title}</h3>
-          <p className="text-sm text-zinc-300 mb-4 line-clamp-3">{description}</p>
+          {description && <p className="text-sm text-zinc-300 mb-4 line-clamp-3">{description}</p>}
           
           <div className="flex flex-wrap gap-2 mb-4">
             {technologies.map((tech, i) => (
