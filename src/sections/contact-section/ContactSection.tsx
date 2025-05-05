@@ -27,23 +27,34 @@ const BackgroundEffects = () => (
 );
 const SectionTitle = ({ isInView }: { isInView: boolean }) => (
   <motion.div
-    className="mb-14 relative"
-    initial={{ opacity: 0 }}
-    animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-    transition={{ duration: 0.6 }}
-  >
-    <h3 className="text-3xl font-bold text-center relative">
-      <span className="text-zinc-200">Get In</span>
-      <span className="text-cyan-400 ml-2">Touch</span>
-      <motion.div
-        className="absolute left-1/2 -bottom-3 h-[2px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent"
-        initial={{ width: 0 }}
-        animate={isInView ? { width: "120px" } : { width: 0 }}
-        transition={{ duration: 0.8, delay: 0.3 }}
-        style={{ transform: "translateX(-50%)" }}
-      />
-    </h3>
-  </motion.div>
+  className="mb-8 relative"
+  initial={{ opacity: 0 }}
+  animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+  transition={{ duration: 0.6 }}
+>
+  <div className="flex items-center justify-center gap-3 mb-2">
+    <div className="h-[1px] w-6 bg-cyan-500"></div>
+    <motion.div
+      className="w-3 h-3 rounded-sm bg-zinc-900 border border-cyan-500 relative rotate-45"
+      animate={{ rotate: [45, 225, 45] }}
+      transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+    >
+      <div className="absolute inset-0 bg-cyan-500/20 blur-sm"></div>
+    </motion.div>
+    <div className="h-[1px] w-6 bg-cyan-500"></div>
+  </div>
+
+  <h3 className="text-3xl font-bold text-center relative">
+    <span className="text-zinc-200">Contact</span>
+    <span className="text-cyan-400 ml-2">Me</span>
+    <div className="absolute left-1/2 -bottom-3 w-36 h-[2px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent transform -translate-x-1/2"></div>
+  </h3>
+  <div className="text-center mt-6 text-xs uppercase tracking-widest text-zinc-500">
+    <span>Got a project or question</span>
+    <span className="mx-2 text-cyan-500">?</span>
+    <span>Let’s connect.</span>
+  </div>
+</motion.div>
 );
 export const ContactSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
